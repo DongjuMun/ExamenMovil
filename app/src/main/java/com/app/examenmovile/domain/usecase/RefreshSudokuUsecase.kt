@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetSudokuUseCase
+class RefreshSudokuUsecase
     @Inject
     constructor(
         private val repository: SudokuRepository,
@@ -19,10 +19,8 @@ class GetSudokuUseCase
             flow {
                 try {
                     emit(Result.Loading)
-                    val sudoku = repository.getSudoku(size, difficulty)
-                    if (sudoku != null) {
-                        emit(Result.Success(sudoku))
-                    }
+                    val sudoku = repository.refreshSudoku(size, difficulty)
+                    emit(Result.Success(sudoku ?: Sudoku(0, "", emptyList())))
                 } catch (e: Exception) {
                     emit(Result.Error(e))
                 }

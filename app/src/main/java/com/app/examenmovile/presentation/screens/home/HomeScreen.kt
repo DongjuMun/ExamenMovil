@@ -2,6 +2,7 @@
 
 package com.app.examenmovile.presentation.screens.home
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -36,13 +37,13 @@ fun HomeScreen(onClick: (Int, String) -> Unit) {
     var selected2 by remember { mutableStateOf("Selecciona dificultad") }
 
     Scaffold(
-        containerColor = Color(0xFF040610),
+        containerColor = Color.Black,
         topBar = {
             TopAppBar(
                 title = {
                     Text(
                         "Elige el tipo de sudoku",
-                        color = Color.White,
+                        color = Color.Black,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -74,14 +75,14 @@ fun HomeScreen(onClick: (Int, String) -> Unit) {
                     DropdownMenuItem(
                         text = { Text("4x4") },
                         onClick = {
-                            selected1 = "4"
+                            selected1 = "4x4"
                             expanded1 = false
                         },
                     )
                     DropdownMenuItem(
                         text = { Text("9x9") },
                         onClick = {
-                            selected1 = "9"
+                            selected1 = "9x9"
                             expanded1 = false
                         },
                     )
@@ -130,7 +131,13 @@ fun HomeScreen(onClick: (Int, String) -> Unit) {
 
             Button(
                 onClick = {
-                    onClick(selected1.toInt(), selected2)
+                    Log.d("SendData", "$selected1 and $selected2")
+                    if (selected1 == "4x4") {
+                        onClick(2, selected2)
+                    }
+                    if (selected1 == "9x9") {
+                        onClick(3, selected2)
+                    }
                 },
             ) {
                 Text("Empezar")

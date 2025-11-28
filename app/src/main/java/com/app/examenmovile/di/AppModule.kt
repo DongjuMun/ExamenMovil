@@ -23,7 +23,7 @@ object AppModule {
     fun provideRetrofit(): Retrofit =
         Retrofit
             .Builder()
-            .baseUrl("https://api.api-ninjas.com/v1/sudokugenerate")
+            .baseUrl("https://api.api-ninjas.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

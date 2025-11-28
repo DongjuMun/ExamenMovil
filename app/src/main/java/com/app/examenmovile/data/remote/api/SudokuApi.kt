@@ -1,5 +1,6 @@
 package com.app.examenmovile.data.remote.api
 
+import com.app.examenmovile.data.remote.dto.SolutionDto
 import com.app.examenmovile.data.remote.dto.SudokuDto
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -14,4 +15,12 @@ interface SudokuApi {
         @Query("difficulty") difficulty: String? = null,
         @Query("seed") seed: Long? = null,
     ): SudokuDto
+
+    @GET("v1/sudokusolve")
+    suspend fun getSolution(
+        @Header("X-Api-Key") apiKey: String,
+        @Query("width") width: Int? = null,
+        @Query("height") height: Int? = null,
+        @Query("puzzle") puzzle: String,
+    ): SolutionDto
 }
